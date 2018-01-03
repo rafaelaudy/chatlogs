@@ -1,11 +1,27 @@
+import { getMessages, getMembers } from './data';
+
 export default function getChatLog() {
-  return Promise.resolve([{
-    messageId: '12356',
-    userId: '613651251',
-    fullName: 'Robin Balmforth',
-    timestamp: new Date().toISOString(),
-    email: 'robin@example.com',
-    message: 'Hello, World!',
-    avatar: null
-  }]);
+  return Promise.all([getMessages(), getMembers()])
+    .then((data) => {
+      const messages = data[0];
+      const members = data[1];
+
+      let chatlogs = [];
+      messages.forEach(message => {
+        const member = members.find(member => member.id === message.userId);
+        const chatlog = {
+          messageId: message.id,
+          userId: member.id,
+          fullName: `${member.firstName} ${member.lastName}`,
+          timestamp: message.timestamp,
+          email: member.email,
+          message: message.message,
+          avatar: member.avatar
+        }
+        chatlogs.push(chatlog);
+      });
+
+      // desc sort by timestamp
+      return chatlogs.sort((a,b) => b.timestamp.localeCompare(a.timestamp));
+    });
 };
