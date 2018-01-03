@@ -2,12 +2,21 @@
   "name": "interview",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "collectCoverageFrom" : [
+      "src/**/*.{js,jsx}",
+      "!src/index.js"
+    ]
+  },
   "devDependencies": {
-    "react-scripts": "1.0.0"
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "react-scripts": "^1.0.17",
+    "react-test-renderer": "^16.2.0"
   },
   "dependencies": {
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
