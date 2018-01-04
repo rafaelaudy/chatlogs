@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
+
 import './App.css';
+import Chatlogs from './Chatlogs';
 
-class App extends Component {
-  render() {
-    return (
-      <h1>
-        Hello Robin!
-      </h1>
-    );
-  }
-}
-
-export default App;
+export default () =>
+  <div className='App'>
+    <h1 className='App-header'>
+      Chatlogs:
+    </h1>
+    <Chatlogs/>
+  </div>

@@ -1,5 +1,15 @@
 import { getMessages, getMembers } from './data';
 
+const mapChatlog = (message, member) => ({
+    messageId: message.id,
+    userId: member.id,
+    fullName: `${member.firstName} ${member.lastName}`,
+    timestamp: message.timestamp,
+    email: member.email,
+    message: message.message,
+    avatar: member.avatar
+});
+
 export default function getChatLog() {
   return Promise.all([getMessages(), getMembers()])
     .then((data) => {
@@ -9,16 +19,7 @@ export default function getChatLog() {
       let chatlogs = [];
       messages.forEach(message => {
         const member = members.find(member => member.id === message.userId);
-        const chatlog = {
-          messageId: message.id,
-          userId: member.id,
-          fullName: `${member.firstName} ${member.lastName}`,
-          timestamp: message.timestamp,
-          email: member.email,
-          message: message.message,
-          avatar: member.avatar
-        }
-        chatlogs.push(chatlog);
+        chatlogs.push(mapChatlog(message, member));
       });
 
       // desc sort by timestamp

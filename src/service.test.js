@@ -27,7 +27,7 @@ describe('Service tests', () => {
 
   it('returns an array of chatlogs', () => {
     return getChatLog().then((chatLogs) => {
-      expect(Array.isArray(chatLogs)).toBe(true);
+      expect(Array.isArray(chatLogs)).toBeTruthy();
     });
   });
 
