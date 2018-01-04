@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import * as data from './data';
 import getChatLog from './service';
 
@@ -25,20 +26,18 @@ describe('Service tests', () => {
     expect(getMembersMock.mock.calls.length).toBe(1);
   });
 
-  it('returns an array of chatlogs', () => {
-    return getChatLog().then((chatLogs) => {
-      expect(Array.isArray(chatLogs)).toBeTruthy();
-    });
-  });
+  it('returns an array of chatlogs', () => getChatLog().then((chatLogs) => {
+    expect(Array.isArray(chatLogs)).toBeTruthy();
+  }));
 
   it('chatlogs are in the correct format', () => {
-    const message = { ...require('./messages.json')[0]};
-    const member = { ...require('./members.json')[0]};
-    message.id = "message1";
-    message.userId = "member1";
-    member.id = "member1";
-    member.firstName = "mariana";
-    member.lastName = "berg";
+    const message = { ...require('./messages.json')[0] };
+    const member = { ...require('./members.json')[0] };
+    message.id = 'message1';
+    message.userId = 'member1';
+    member.id = 'member1';
+    member.firstName = 'mariana';
+    member.lastName = 'berg';
     getMessagesMock.mockImplementation(() => Promise.resolve([message]));
     getMembersMock.mockImplementation(() => Promise.resolve([member]));
 
@@ -54,9 +53,9 @@ describe('Service tests', () => {
   });
 
   it('returns chatlogs ordered by timestamp is desc order', () => {
-    const messages = { ...require('./messages.json')};
-    messages[0].timestamp = "2015-11-09T05:04:58Z";
-    messages[1].timestamp = "2017-11-09T05:04:58Z";
+    const messages = { ...require('./messages.json') };
+    messages[0].timestamp = '2015-11-09T05:04:58Z';
+    messages[1].timestamp = '2017-11-09T05:04:58Z';
     getMessagesMock.mockImplementation(() => Promise.resolve([messages[0], messages[1]]));
 
     return getChatLog().then((chatLogs) => {

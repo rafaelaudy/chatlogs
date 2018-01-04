@@ -1,13 +1,13 @@
 import { getMessages, getMembers } from './data';
 
 const mapChatlog = (message, member) => ({
-    messageId: message.id,
-    userId: member.id,
-    fullName: `${member.firstName} ${member.lastName}`,
-    timestamp: message.timestamp,
-    email: member.email,
-    message: message.message,
-    avatar: member.avatar
+  messageId: message.id,
+  userId: member.id,
+  fullName: `${member.firstName} ${member.lastName}`,
+  timestamp: message.timestamp,
+  email: member.email,
+  message: message.message,
+  avatar: member.avatar,
 });
 
 export default function getChatLog() {
@@ -16,13 +16,13 @@ export default function getChatLog() {
       const messages = data[0];
       const members = data[1];
 
-      let chatlogs = [];
-      messages.forEach(message => {
-        const member = members.find(member => member.id === message.userId);
+      const chatlogs = [];
+      messages.forEach((message) => {
+        const member = members.find(memberInstance => memberInstance.id === message.userId);
         chatlogs.push(mapChatlog(message, member));
       });
 
       // desc sort by timestamp
-      return chatlogs.sort((a,b) => b.timestamp.localeCompare(a.timestamp));
+      return chatlogs.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
     });
-};
+}

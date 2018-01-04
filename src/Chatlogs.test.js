@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
 import Chatlogs from './Chatlogs';
@@ -16,7 +15,7 @@ afterEach(() => {
 });
 
 it('loads the chatlog messages from service', () => {
-  const chatlogs = shallow(<Chatlogs />);
+  shallow(<Chatlogs />);
   expect(getChatLogMock.mock.calls.length).toBe(1);
 });
 
@@ -38,7 +37,7 @@ it('renders an empty page when there is no Chatlogs', () => {
 });
 
 it('renders a list of Chatlogs', () => {
-  const chatlog = {avatar: 'a', email: 'e', timestamp: '2016-03-15T20:24:57Z'};
+  const chatlog = { avatar: 'a', email: 'e', timestamp: '2016-03-15T20:24:57Z' };
   const chatlogsPromise = Promise.resolve([chatlog, chatlog]);
   getChatLogMock.mockImplementation(() => chatlogsPromise);
 
