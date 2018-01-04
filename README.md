@@ -1,45 +1,46 @@
-# NowTV React Interview
+# Chatlogs
 
-![NowTV](./logo.png)
-
-## Commands
-
-- **npm start**: Runs the web application in developer mode
-- **npm test**: Executes Jest tests that have the `.test.js` extension
-
-## Tasks
-
-Feel free to create new files to help you complete these tasks. Please ask before downloading any external libraries, most will be fine.
-
-1. In `service.js`, utilise the 'APIs' provided by `data.js` to create a promise resolving to an array of chatlog messages in the following format, sorted by time.
-
-```json
-[
-  {
-    "messageId": "12356",
-    "userId": "613651251",
-    "fullName": "Robin Balmforth",
-    "timestamp": "2017-02-23T14:57:20.629Z",
-    "email": "robin@example.com",
-    "message": "Hello, World!",
-    "avatar": null
-  },
-  ...
-]
+## Questions:
+- How would you achieve this with Redux?
 ```
-(Do not modify `data.js` to achieve this, but if you think there's an issue ask the developer helping you!)
+I would remove any mention to the React state in the components and add that behaviour information on the redux store.
 
-2. Create a view of this dataset, with the root of your React application starting in `App.js`. Including:
-  - Display the `avatar` where applicable
-  - Display the `email` on hover
-  - Format the timestamp to be human readable
-
-3. Submit your solution as a pull request to the GitHub repository.
-
-4. Bonus Questions:
-  - How would you achieve this with Redux?
+For that I would dispatch actions on the components to signal the UI changes.
+Create the reducers to change the store based on the actions raised.
+And I would use middleware library, like redux-thunk, to request the chatlog data from the API.
+```
   - How would you handle an error from the API?
+```
+I could catch error with a catch on the request promise and add that information to the Redux store.
+The UI would react to that showing a user friendly message on the screen.
+```
   - If you were to continue this application, what would you add?
-  - If you were to deploy this application (or any web application) to production, how would you personally do it?
-  - Finally, what did you think of the test? 😀
+```
+CI, Redux, a middleware library, SASS, SMACSS, a real server for the API, high level functional tests and integration, monitoring tools.
+Of course that would change depending on how big the team thinks that the application may grow.
+```
+- If you were to deploy this application (or any web application) to production, how would you personally do it?
+```
+I would like to have a one-click deployment infrastructure in place.
+That would mean having a CI tool which would run:
 
+  * Unit test;
+  * Functional tests;
+  * Integrations tests:
+  * Check coverage;
+  * Deployment scripts.
+
+I also would like to have different hosts for the UI and the API so it gets easier to deploy and scale the app.
+```
+  - Finally, what did you think of the test? 😀
+```
+Fun test, small without being shallow, quite a feat :)
+It was fun to use react-scripts as well, I had never used it before.
+I did update the libraries since I was having some issues adding enzyme with the old versions of React and react-scripts.
+
+Also, I added the following libraries:
+  *  Enzyme and it's dependencies;
+  *  Eslint and it's dependencies.
+
+Sorry for not asking beforehand, I coded this at night :)
+```
